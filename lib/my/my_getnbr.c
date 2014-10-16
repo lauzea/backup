@@ -1,35 +1,34 @@
 /*
-** my_getnbr.c for my_getnbr in /home/lauze_a/rendu/Piscine_C_J04
-** 
-** Made by lauze_a lauze_a
+** my_getnbr.c for my_getnbr in /home/lauze_a/rendu/MUL_2013_rtv1
+**
+** Made by lauze_a
 ** Login   <lauze_a@epitech.net>
-** 
-** Started on  Thu Oct  2 10:04:44 2014 lauze_a lauze_a
-** Last update Tue Oct  7 09:57:46 2014 lauze_a lauze_a
+**
+** Started on  Mon Feb 03 12:14:41 2014 lauze_a
+** Last update Mon Feb 17 12:13:21 2014 lauze_a
 */
 
-int	my_getnbr(char *str)
+int     my_get_nbr(char *str)
 {
+  int	n;
   int	i;
-  int	incr;
-  int	res;
-  int	cpn;
+  int   nb;
 
   i = 0;
-  incr = 0;
-  res = 0;
-  while (str[i] < '0' || str[i] > '9')
+  nb = 0;
+  n = 1;
+  while (str[i] != '\0' && (str[i] == '+' || str[i] == '-' ||
+			     (str[i] >= '0' && str[i] <= '9')))
     {
-      if (str[i] == '-')
-	cpn++;
-      i++;
+      while (str[i] == '-')
+        {
+          n = n * -1;
+	  i = i + 1;
+        }
+      nb = nb + (str[i] - '0');
+      nb = nb * 10;
+      i = i + 1;
     }
-  while (str[i] != '\0')
-    {
-      res = (res * 10) + (str[i] - 48);
-      i++;
-    }
-  if (cpn % 2 == 1)
-    my_putchar('-');
-  return (res);
+  nb = nb / 10;
+  return (nb * n);
 }
