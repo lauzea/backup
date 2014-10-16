@@ -30,7 +30,6 @@ char	**split_str(char *str, char **tab)
 	  i++;
 	}
       i++;
-      printf("%s\n", tab[c][r]);
     }
   return (tab);
 }
