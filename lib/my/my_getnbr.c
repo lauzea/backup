@@ -1,34 +1,49 @@
 /*
-** my_getnbr.c for my_getnbr in /home/lauze_a/rendu/MUL_2013_rtv1
-**
-** Made by lauze_a
+** my_getnbr.c for my_getnbr in /home/lauze_a/rendu/Piscine_C_J04
+** 
+** Made by lauze_a lauze_a
 ** Login   <lauze_a@epitech.net>
-**
-** Started on  Mon Feb 03 12:14:41 2014 lauze_a
-** Last update Mon Feb 17 12:13:21 2014 lauze_a
+** 
+** Started on  Thu Oct  2 10:04:44 2014 lauze_a lauze_a
+** Last update Mon Oct 20 13:56:12 2014 lauze_a lauze_a
 */
 
-int     my_get_nbr(char *str)
+int             my_is_neg(char *str)
 {
-  int	n;
-  int	i;
-  int   nb;
+  int           i;
+  int           counter;
 
   i = 0;
-  nb = 0;
-  n = 1;
-  while (str[i] != '\0' && (str[i] == '+' || str[i] == '-' ||
-			     (str[i] >= '0' && str[i] <= '9')))
+  counter = 0;
+  while (str[i] > '9' || str[i] < '0')
     {
-      while (str[i] == '-')
-        {
-          n = n * -1;
-	  i = i + 1;
-        }
-      nb = nb + (str[i] - '0');
-      nb = nb * 10;
-      i = i + 1;
+      if (str[i] == '-')
+        counter++;
+      i++;
     }
-  nb = nb / 10;
-  return (nb * n);
+  if (counter % 2 != 0)
+    return (1);
+  else
+    return (0);
+}
+
+int	my_getnbr(char *str)
+{
+  int	i;
+  int	incr;
+  int	res;
+
+  i = 0;
+  incr = 0;
+  res = 0;
+   while (str[i] < '0' || str[i] > '9')
+     i++;
+   while (str[i] != '\0')
+     {
+       res = (res * 10) + (str[i] - 48);
+       i++;
+     }
+   if (my_is_neg(str) == 1)
+     my_putchar('-');
+   return (res);
 }
